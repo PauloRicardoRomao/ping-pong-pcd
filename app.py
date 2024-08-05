@@ -1,5 +1,6 @@
 import turtle
 from turtle import *
+import pygame
 
 
 
@@ -11,6 +12,11 @@ janela.bgcolor("black")
 janela.setup(width=800, height=600)
 janela.tracer(0)
 
+#Sons da janela (paredes laterais)
+
+pygame.mixer.init()
+s_p_esq = pygame.mixer.Sound("som1")
+s_p_dir = pygame.mixer.Sound("som2")
 
 #Raquetes
 
@@ -119,20 +125,25 @@ while True:
         bola.sety(290)
         bola.dy *= -1
 
+
     if bola.ycor() < -290:
         bola.sety(-290)
         bola.dy *= -1
 
+
     if bola.xcor() > 390:
         bola.goto(0, 0)
         bola.dx *= -1
+        s_p_esq.play()
         plc_esq += 1
         display_plc.clear()
         display_plc.write(f"Esquerda: {plc_esq}     Direita: {plc_dir}", align="center", font=("Courier", 24, "normal"))
     
+
     if bola.xcor() < -390:
         bola.goto(0, 0)
         bola.dx *= -1
+        s_p_dir.play()
         plc_dir += 1
         display_plc.clear()
         display_plc.write(f"Esquerda: {plc_esq}     Direita: {plc_dir}", align="center", font=("Courier", 24, "normal"))
